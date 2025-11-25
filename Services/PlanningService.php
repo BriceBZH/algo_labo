@@ -20,11 +20,13 @@ class PlanningService
         //gestion des samples
         $samples = $this->sampleFactory->samples($jsonDecoded['samples']);
 
-        //trie des samples
-        $samples = Sample::sortSamples($samples);
-
-        //parcourt des samples
-        //ajout planning
+        // foreach ($samples as $sample) { //parcourt des samples
+        //     //on récupère un technicien libre
+        //     $technician = 
+        //     //un equipement libre
+        //     //ajout planning
+        // }
+        
         //ajout metrics
 
         //return
