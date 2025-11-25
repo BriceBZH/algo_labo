@@ -19,5 +19,14 @@ class PlanningService
         $equipments = $this->equipmentFactory->equipments($jsonDecoded['equipment']);
         //gestion des samples
         $samples = $this->sampleFactory->samples($jsonDecoded['samples']);
+
+        //trie des samples
+        $samples = Sample::sortSamples($samples);
+
+        //parcourt des samples
+        //ajout planning
+        //ajout metrics
+
+        //return
     }
 }

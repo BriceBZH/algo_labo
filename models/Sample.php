@@ -11,4 +11,13 @@ class Sample
         $this->arrivalTime = $arrivalTime;
         $this->patientId = $patientId;
     }
+
+    public static function sortSamples(array $samples) : array {
+        function sortSamp($a, $b) {
+            $prioritySample = ["STAT" => 3, "URGENT" => 2, "ROUTINE" => 1];
+            return $prioritySample[$b->priority] <=> $prioritySample[$a->priority];
+        }
+        usort($samples, "sortSamp");
+        return $samples;
+    }
 }
