@@ -2,15 +2,15 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$metricsCalculator = new MetricsCalculator();
+// $metricsCalculator = new MetricsCalculator();
 $equipmentFactory  = new EquipmentFactory();
 $technicianFactory = new TechnicianFactory();
 $sampleFactory     = new SampleFactory();
 
 $planningService = new PlanningService(
-    $metricsCalculator,
-    $equipmentFactory,
+    // $metricsCalculator,
     $technicianFactory,
+    $equipmentFactory,
     $sampleFactory
 );
 

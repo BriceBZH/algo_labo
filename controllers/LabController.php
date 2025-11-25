@@ -21,7 +21,7 @@ class LabController extends AbstractController
         if ($inputJson) {
             $decoded = json_decode($inputJson, true);
             if (json_last_error() === JSON_ERROR_NONE) {
-                
+                $planning = $this->planningService->generatePlanning($decoded);
                 $result = $planning->getPlanning();
             } else {
                 $data["error"] = "JSON invalide : " . json_last_error_msg();
