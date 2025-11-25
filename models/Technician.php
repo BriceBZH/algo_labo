@@ -11,5 +11,7 @@ class Technician {
         $this->availableFrom = $startTime;
     }
 
+    // public function setAvailableFrom(Datetime $) {
 
+    // }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class SampleFactory
+class SampleService
 {
     public function samples(array $samples) : array {
         $sampls = [];
@@ -10,7 +10,6 @@ class SampleFactory
 
         //trie des samples
         $samples = $this->sortSamples($sampls);
-        dd($samples);
         return $samples;
     }
 

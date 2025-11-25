@@ -1,6 +1,6 @@
 <?php
 
-class EquipmentFactory
+class EquipmentService
 {
     public function equipments(array $equipments) : array {
         $equips = [];
@@ -9,5 +9,14 @@ class EquipmentFactory
              $equips[] = new Equipment($equipment['id'], $name, $equipment['type'], $equipment['available']);
         }
         return  $equips;
+    }
+
+    public function getEquipment(array $equipments, string $sampleType) : ?Equipment {
+        foreach($equipments as $equipment) {
+            if($equipment->type === $sampleType && $equipment->available) {
+                return $equipment;
+            }
+        }
+        return null;
     }
 }
