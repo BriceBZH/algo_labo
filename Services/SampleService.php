@@ -5,7 +5,7 @@ class SampleService
     public function samples(array $samples) : array {
         $sampls = [];
         foreach($samples as $sample) {
-            $sampls[] = new Sample($sample['id'], $sample['type'], $sample['priority'], $sample['analysisTime'], new Datetime($sample['arrivalTime']), $sample['patientId']);
+            $sampls[] = new Sample($sample['id'], $sample['type'], $sample['priority'], $sample['analysisTime'], new DateTimeImmutable($sample['arrivalTime']), $sample['patientId']);
         }
 
         //trie des samples

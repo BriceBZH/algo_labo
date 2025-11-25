@@ -6,12 +6,14 @@ require_once __DIR__ . '/vendor/autoload.php';
 $equipmentService  = new EquipmentService();
 $technicianService = new TechnicianService();
 $sampleService     = new SampleService();
+$schedulerService     = new SchedulerService();
 
 $planningService = new PlanningService(
     // $metricsCalculator,
     $technicianService,
     $equipmentService,
-    $sampleService
+    $sampleService,
+    $schedulerService
 );
 
 $controller = new LabController($planningService);

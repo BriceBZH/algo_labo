@@ -9,4 +9,8 @@ class Equipment {
         $this->available = $available;
     }
 
+    public function setAvailable(bool $available) : void {
+        $this->available = $available;
+    }
+
 }
