@@ -11,8 +11,7 @@ class LabController extends AbstractController
         $this->planningService = $planningService;
     }
 
-    public function planifyLab()
-    {
+    public function planifyLab() {
         $inputJson = $_POST['inputJson'] ?? null;
         $data = [
             "inputJson" => $inputJson
@@ -21,8 +20,7 @@ class LabController extends AbstractController
         if ($inputJson) {
             $decoded = json_decode($inputJson, true);
             if (json_last_error() === JSON_ERROR_NONE) {
-                $planning = $this->planningService->generatePlanning($decoded);
-                $result = $planning->getPlanning();
+                $result = $this->planningService->generatePlanning($decoded);
             } else {
                 $data["error"] = "JSON invalide : " . json_last_error_msg();
             }

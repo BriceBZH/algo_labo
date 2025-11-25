@@ -2,14 +2,14 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-// $metricsCalculator = new MetricsCalculator();
+$metricsCalculator = new MetricsCalculator();
 $equipmentService  = new EquipmentService();
 $technicianService = new TechnicianService();
 $sampleService     = new SampleService();
 $schedulerService     = new SchedulerService();
 
 $planningService = new PlanningService(
-    // $metricsCalculator,
+    $metricsCalculator,
     $technicianService,
     $equipmentService,
     $sampleService,

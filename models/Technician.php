@@ -11,7 +11,7 @@ class Technician {
         $this->availableFrom = $startTime;
     }
 
-    // public function setAvailableFrom(Datetime $) {
-
-    // }
+    public function setAvailableFrom(DatetimeImmutable $endAnalys) {
+        $this->availableFrom = $endAnalys;
+    }
 }
