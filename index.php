@@ -7,13 +7,15 @@ $equipmentService  = new EquipmentService();
 $technicianService = new TechnicianService();
 $sampleService     = new SampleService();
 $schedulerService     = new SchedulerService();
+$controlInputs     = new ControlInputs();
 
 $planningService = new PlanningService(
     $metricsCalculator,
     $technicianService,
     $equipmentService,
     $sampleService,
-    $schedulerService
+    $schedulerService,
+    $controlInputs
 );
 
 $controller = new LabController($planningService);
