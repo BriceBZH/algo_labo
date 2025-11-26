@@ -32,12 +32,12 @@ class PlanningService
             //on récupère un technicien libre
             $technician = $this->technicianService->getTechnician($technicians, $sample);
             //on récupère un equipement libre 
-            $equipment = $this->equipmentService->getEquipment($equipments, $sample->type);
+            $equipment = $this->equipmentService->getEquipment($equipments, $sample);
             /**********************************/
 
             /*** Calcul des heures d'analyse **/
             //on calcul les heures de début et de fin d'analyse
-            $startAnalys = $this->schedulerService->getStartTime($technician->availableFrom, $sample->arrivalTime);
+            $startAnalys = $this->schedulerService->getStartTime($technician->availableFrom, $equipment->availableFrom, $sample->arrivalTime);
             $endAnalys = $this->schedulerService->getEndTime($startAnalys, $sample->analysisTime);
             /**********************************/
 
@@ -49,8 +49,7 @@ class PlanningService
             //on change l'heure de dispo du technicien
             $technician->setAvailableFrom($endAnalys);
             //l'equipement passe à plus disponible
-            $equipment->setAvailable(false);
-            $equipment->setAvailable(true);
+            $equipment->setAvailableFrom($endAnalys);
             /**********************************/
 
             /******** Partie scheduler ********/     

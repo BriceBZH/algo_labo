@@ -15,9 +15,11 @@ class TechnicianService
         $sampleType = $sample->type;
         $sampleArrivalTime = $sample->arrivalTime;
         foreach($technicians as $technician) {
-            if(($technician->speciality === $sampleType || $technician->speciality === "GENERAL") && $technician->startTime <= $sampleArrivalTime && $technician->endTime > $sampleArrivalTime) {
+            if(($technician->speciality === $sampleType || $technician->speciality === "GENERAL") && $technician->availableFrom <= $sampleArrivalTime && $technician->endTime > $sampleArrivalTime) {
                 return $technician;
-            }
+            } else if (($technician->speciality === $sampleType || $technician->speciality === "GENERAL") && $technician->endTime > $sampleArrivalTime) {
+                return $technician;
+            }   
         }
         return null;
     }
