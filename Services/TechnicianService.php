@@ -6,7 +6,9 @@ class TechnicianService
         $techs = [];
         foreach($technicians as $technician) {
             $name = $technician['name'] ?? "";
-            $techs[] = new Technician($technician['id'], $name, $technician['speciality'], new DateTimeImmutable($technician['startTime']), new DateTimeImmutable($technician['endTime']), new DateTimeImmutable());
+            $jsonSpeciality = $technician['speciality'] ?? $technician['specialty'] ?? null;
+            $speciality = is_array($jsonSpeciality) ? $jsonSpeciality : [$jsonSpeciality];
+            $techs[] = new Technician($technician['id'], $name, $speciality, new DateTimeImmutable($technician['startTime']), new DateTimeImmutable($technician['endTime']), new DateTimeImmutable());
         }
         return $techs;
     }
@@ -15,12 +17,13 @@ class TechnicianService
         $sampleType = $sample->type;
         $sampleArrivalTime = $sample->arrivalTime;
         foreach($technicians as $technician) {
-            if(($technician->speciality === $sampleType || $technician->speciality === "GENERAL") && $technician->availableFrom <= $sampleArrivalTime && $technician->endTime > $sampleArrivalTime) {
+            if((in_array($sampleType, $technician->speciality) || in_array("GENERAL", $technician->speciality)) && $technician->availableFrom <= $sampleArrivalTime && $technician->endTime > $sampleArrivalTime) {
                 return $technician;
-            } else if (($technician->speciality === $sampleType || $technician->speciality === "GENERAL") && $technician->endTime > $sampleArrivalTime) {
+            } else if ((in_array($sampleType, $technician->speciality) || in_array("GENERAL", $technician->speciality)) && $technician->endTime > $sampleArrivalTime) {
                 return $technician;
             }   
         }
         return null;
     }
 }
+

@@ -34,7 +34,8 @@ class PlanningService
             //on récupère un equipement libre 
             $equipment = $this->equipmentService->getEquipment($equipments, $sample);
             /**********************************/
-
+            dump($technician);
+            dump($equipment);
             /*** Calcul des heures d'analyse **/
             //on calcul les heures de début et de fin d'analyse
             $startAnalys = $this->schedulerService->getStartTime($technician->availableFrom, $equipment->availableFrom, $sample->arrivalTime);
@@ -54,7 +55,7 @@ class PlanningService
 
             /******** Partie scheduler ********/     
             //ajout dans le scheduler
-            $schedule[] = new Scheduler($sample->id, $technician->id, $equipment->id, $startAnalys->format("H:i"), $endAnalys->format("H:i"), $sample->priority);
+            $schedule[] = new Scheduler($sample->id, $sample->priority, $technician->id, $equipment->id, $startAnalys->format("H:i"), $endAnalys->format("H:i"), $sample->analysisTime, $sample->analysisType, 1.0);
             /**********************************/
 
             /******** Valeurs pour metrics ****/
