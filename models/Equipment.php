@@ -12,6 +12,9 @@ class Equipment {
         $this->cleaningTime = $cleaningTime;
     }
 
+    /***********************
+    * Pour mettre à jour l'heure de dispo de l'équipement
+    ************************/
     public function setAvailableFrom(DatetimeImmutable $endAnalys) {
         $this->availableFrom = $endAnalys;
     }

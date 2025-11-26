@@ -16,7 +16,7 @@
 
     {% if result is defined %}
         <h2>Résultat</h2>
-        <pre>{{ result|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+        <pre>{{ result|json_encode(constant('JSON_PRETTY_PRINT') b-or constant('JSON_UNESCAPED_UNICODE')) }}</pre>
     {% endif %}
 </body>
 </html>

@@ -2,6 +2,9 @@
 
 class EquipmentService
 {
+    /***********************
+    * Création des objet equipement
+    ************************/
     public function equipments(array $equipments) : array {
         $equips = [];
         foreach($equipments as $equipment) {
@@ -14,6 +17,9 @@ class EquipmentService
         return  $equips;
     }
 
+    /***********************
+    * Sélection d'un equipement en fonction de plusieurs critères
+    ************************/
     public function getEquipment(array $equipments, Sample $sample) : ?Equipment {
         $sampleType = $sample->type;
         $sampleArrivalTime = $sample->arrivalTime;

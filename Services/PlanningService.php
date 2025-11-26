@@ -23,7 +23,6 @@ class PlanningService
         $equipments = $this->equipmentService->equipments($jsonDecoded['equipment']);
         //gestion des samples
         $samples = $this->sampleService->samples($jsonDecoded['samples']);
-
         $schedule = [];
         $startPlanning = "";
         $totalAnalyse = 0;
@@ -34,16 +33,17 @@ class PlanningService
             //on récupère un equipement libre 
             $equipment = $this->equipmentService->getEquipment($equipments, $sample);
             /**********************************/
-            dump($technician);
-            dump($equipment);
+
             /*** Calcul des heures d'analyse **/
+            //calcul durée analyse 
+            $timeAnalys = $this->schedulerService->calculAnalys($technician->efficiency, $sample->analysisTime);
             //on calcul les heures de début et de fin d'analyse
             $startAnalys = $this->schedulerService->getStartTime($technician->availableFrom, $equipment->availableFrom, $sample->arrivalTime);
-            $endAnalys = $this->schedulerService->getEndTime($startAnalys, $sample->analysisTime);
+            $endAnalys = $this->schedulerService->getEndTime($startAnalys, $timeAnalys);
             /**********************************/
 
             /****** Calcul des metrics ********/
-            $totalAnalyse += $sample->analysisTime;
+            $totalAnalyse += $timeAnalys;
             /**********************************/
 
             /****** Mise à jour de champs *****/
@@ -55,7 +55,7 @@ class PlanningService
 
             /******** Partie scheduler ********/     
             //ajout dans le scheduler
-            $schedule[] = new Scheduler($sample->id, $sample->priority, $technician->id, $equipment->id, $startAnalys->format("H:i"), $endAnalys->format("H:i"), $sample->analysisTime, $sample->analysisType, 1.0);
+            $schedule[] = new Scheduler($sample->id, $sample->priority, $technician->id, $equipment->id, $startAnalys->format("H:i"), $endAnalys->format("H:i"), $timeAnalys, $sample->analysisType, $technician->efficiency, $equipment->cleaningTime);
             /**********************************/
 
             /******** Valeurs pour metrics ****/
@@ -66,7 +66,7 @@ class PlanningService
             /**********************************/
         }
         $metrics = $this->metricsCalculator->calculateMetrics($totalAnalyse, $startPlanning, $endAnalys, $technicians, $equipments);
-        
+
         return [
             "schedule" => $schedule,
             "metrics" => $metrics

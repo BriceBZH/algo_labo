@@ -2,6 +2,9 @@
 
 class MetricsCalculator
 {
+    /***********************
+    * Calcul des metrics
+    ************************/
     public function calculateMetrics(int $totalAnalyse, DateTimeImmutable $startPlanning, DateTimeImmutable $endAnalys, array $technicians, array $equipments) : Metrics {
         $totalTime = ($endAnalys->getTimestamp() - $startPlanning->getTimestamp()) / 60;
         $efficenty = round(($totalTime / $totalAnalyse)*100);

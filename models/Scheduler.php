@@ -2,7 +2,7 @@
 
 class Scheduler {
 
-    public function __construct(public string $sampleId, public string $priority, public string $technicianId, public string $equipmentId, public string $startTime, public string $endTime, public int $duration, public string $analysisType, public float $efficiency) {
+    public function __construct(public string $sampleId, public string $priority, public string $technicianId, public string $equipmentId, public string $startTime, public string $endTime, public int $duration, public string $analysisType, public ?float $efficiency, public ?int $cleaningDelay) {
         $this->sampleId = $sampleId;
         $this->technicianId = $technicianId;
         $this->equipmentId = $equipmentId;
@@ -12,6 +12,7 @@ class Scheduler {
         $this->duration = $duration;
         $this->analysisType = $analysisType;
         $this->efficiency = $efficiency;
+        $this->cleaningDelay = $cleaningDelay;
     }
 
 }
